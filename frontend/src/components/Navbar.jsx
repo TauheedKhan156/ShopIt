@@ -1,12 +1,14 @@
-import React,{useState} from 'react'
+import React,{useContext, useState} from 'react'
 import { assets } from '../assets/assets'
 import myImage from '../assets/shopit_text2.png';
 import { Link, NavLink } from 'react-router-dom'
+import { ShopContext } from '../context/ShopContext';
 
 
 const Navbar = () => {
   
-  const [visible, setVisble] = useState(false)
+  const [visible, setVisble] = useState(false);
+  const {showSearch,setShowSearch,getCartCount} = useContext(ShopContext);
 
   return (
     <div className='flex items-center justify-between py-5 font-medium' >
@@ -32,10 +34,13 @@ const Navbar = () => {
         </ul>
 
         <div className='flex items-center gap-6'>
-            <img src={assets.search_icon} className='w-5 cursor-pointer' alt="search icon" />
+            <img onClick={()=>setShowSearch(!showSearch)} 
+            src={assets.search_icon} className='w-5 cursor-pointer' alt="search icon" />
 
             <div className='group relative'>
+                <Link to='/login'>
                 <img className='w-5 cursor-pointer' src={assets.profile_icon} alt="profile icon" />
+                </Link>
 
                 <div className='group-hover:block hidden absolute dropdown-menu right-0 pt-4'>
                     <div className='flex flex-col gap-2 w-36 py-3 px-5  bg-slate-100 text-gray-500 rounded'>
@@ -48,9 +53,14 @@ const Navbar = () => {
 
             <Link to='/cart' className='relative'>
                 <img className='w-5 min-w-5' src={assets.cart_icon} alt="" />
-                <p className='absolute right-[-5px] bottom-[-5px] w-4 text-center leading-4 bg-black text-white aspect-square rounded-full text-[8px]'>10</p>
+                <p className='absolute right-[-5px] bottom-[-5px] w-4 text-center leading-4 bg-black text-white aspect-square rounded-full text-[8px]'>
+                {getCartCount()}
+                </p>
             </Link>
-            <img onClick={() => setVisble(true)} className='w-5 cursor-pointer sm:hidden' src={assets.menu_icon} alt="" />
+
+            <img onClick={() => setVisble(true)} 
+            className='w-5 cursor-pointer sm:hidden' 
+            src={assets.menu_icon} alt="" />
 
         </div>
 
