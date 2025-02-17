@@ -7,5 +7,10 @@ export default {
   theme: {
     extend: {},
   },
+  safelist: [
+    {
+      pattern: /bg-\[radial-gradient.*/,
+    },
+  ],
   plugins: [],
 }

@@ -21,7 +21,7 @@ const App = () => {
   },[token])
 
   return (
-    <div className='bg-gray-50 min-h-screen'>
+    <div className='bg-gradient-to-tr from-slate-700 via-cyan-600 to-gray-700 min-h-screen '>
       <ToastContainer/>
       {
         token === '' ? <Login setToken={setToken} /> :
